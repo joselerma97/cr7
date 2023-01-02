@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Bicho Incomes</title>
+  <title>Bicho Web</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -13,48 +13,207 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1318802193452786"
           crossorigin="anonymous"></script>
 
+  <style>
+    th,td{
+      text-align: center;
+    }
+  </style>
+
 </head>
 <body>
 
 <div class="row blue teal lighten-1">
   <div class="col s12 container_center" style="text-align: center">
         <span class="flow-text">
-            ¿Cuánto Gana el Bicho? <a class="waves-effect modal-trigger" href="#info"><i class="material-icons white-text">help</i></a>
+            <i class="title" ></i> <a class="waves-effect modal-trigger" href="#info"><i class="material-icons white-text">help</i></a>
         </span>
   </div>
 </div>
 
-<div id="result">
-  Hola
-</div>
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-image">
+        <img src="img/cr7.jpg">
+        <span id="card_title" class="card-title"></span>
+      </div>
+      <div class="card-content" style="text-align: center">
+        <p><i class="title"></i></p>
+        <p><i id="team" ></i> <b>Al-Nassr</b></p>
+        <p><i id="contract_start"></i> <b id="contractStart" ></b></p>
+        <p><i id="contract_end" ></i> <b>2025</b></p>
+        <p><i id="annual_income"></i> <b id="annualIncome"></b></p>
+        <p><i id="seconds"></i> <b id="totalSeconds" ></b></p>
+        <p><i id="incomes_sofar"></i></p>
 
-<!-- Modal Structure -->
-<div id="info" class="modal">
-  <div class="modal-content">
-    <h4>Información</h4>
-    <p>Este sitio tiene como propósito dar una demostración de la implementación de un sistema cliente - servidor. Dicho servidor es implementado en Kotlin Spring y el cliente como una web app javascript con el framework de materialize.</p>
-    <p>Próximamente se realizarán videos para compartir los pasos a seguir para desarrollar este sistema. De igual manera, el código fuente del sitio se comparte a continuación:
-      <a target="_blank" href="https://github.com/joselerma97/LermaSuite">Proyecto de Github</a>
-    </p>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <table>
+          <thead>
+          <tr>
+            <th>MXN <i id="mxn"></i></th>
+            <th>EUR <i id="eur"></i></th>
+            <th>USD <i id="usd"></i></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td><i id="mxnSecondIncome" ></i></td>
+            <td><i id="eurSecondIncome" ></i></td>
+            <td><i id="usdSecondIncome" ></i></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-content">
+        <p id="references"></p>
+        <p>REDACCIÓN RÉCORD. (31/12/2022). El 'Bicho' se convirtió en el futbolista mejor pagado del mundo al fichar con el Al-Nassr. <i>Record</i>. <a target="__blank" href="https://www.record.com.mx/empelotados/cristiano-ronaldo-cuanto-cobra-cr7-por-segundo-en-pesos-mexicanos">https://www.record.com.mx/empelotados/cristiano-ronaldo-cuanto-cobra-cr7-por-segundo-en-pesos-mexicanos</a>.</p>
+        <p>Redacción. (31/12/2022). Cristiano Ronaldo: el astro portugués firma un multimillonario contrato con el Al Nassr de Arabia Saudita. <i>BBC News Mundo</i>. <a target="__blank" href="https://www.bbc.com/mundo/deportes-64133982">https://www.bbc.com/mundo/deportes-64133982</a>.</p>
+        <p>  نادي النصر السعودي
+          [@AlNassrFC] (30/12/2022) Image of a TWEET. Twitter. <a target="_blank" href="https://twitter.com/AlNassrFC/status/1608933062288769024/photo/1">https://twitter.com/AlNassrFC/status/1608933062288769024/photo/1</a> </p>
+        <p>Sonidos para videos SIN COPYRIGHT. (02/01/2023). "Siuuu" (Cristiano Ronaldo) - Sonido / Sound. Youtube. <a target="_blank" href="https://www.youtube.com/watch?v=R1l75fZ9qRc" >https://www.youtube.com/watch?v=R1l75fZ9qRc</a></p>
+      </div>
+      <div class="card-action" style="text-align: center">
+        <a style="cursor: pointer" onclick="playSiuuu()">Siuuu</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
+  function playSiuuu(){
+    var audio = new Audio('/sounds/siuuu.mp3');
+    audio.play();
+  }
+</script>
+
+<!-- Modal Structure -->
+<div id="info" class="modal">
+  <div class="modal-content">
+    <h4 id="information"></h4>
+    <p id="description"></p>
+    <p id="description2"></p>
+    <p><a id="github" target="_blank" href="https://github.com/joselerma97/cr7"></a></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+  </div>
+</div>
+
+<script>
+  var mxnSecondIncome = 0.0
+  var usdSecondIncome = 0.0
+  var eurSecondIncome = 0.0
+  var contractStart;
+
   $.get( "https://lermasuite.com/cr7/server.php", function( data ) {
-    $('#result').html(JSON.stringify(data.data))
+    $('#annualIncome').html('$'+numberWithCommas( 214000000 )+' (USD)');
+    $('#contractStart').html(data.data.contractStart);
+
+    mxnSecondIncome = data.data.mxnSecondIncome;
+    usdSecondIncome = data.data.usdSecondIncome;
+    eurSecondIncome = data.data.eurSecondIncome;
+    contractStart = data.data.contractStart;
+
+    $('#mxn').html(' ($'+mxnSecondIncome+'/s)');
+    $('#usd').html(' ($'+usdSecondIncome+'/s)');
+    $('#eur').html(' ($'+eurSecondIncome+'/s)');
+
+    calculateIncome()
   });
+
+  function calculateIncome(){
+    var currentdate = new Date();
+    var startDate = new Date( contractStart + ' 00:00:00');
+    var seconds = Math.floor(
+            Math.abs(currentdate.getTime() - startDate.getTime())/1000
+    );
+    $('#totalSeconds').html(numberWithCommas( seconds ));
+    $('#mxnSecondIncome').html('$'+numberWithCommas( mxnSecondIncome * seconds ));
+    $('#usdSecondIncome').html('$'+numberWithCommas( usdSecondIncome * seconds));
+    $('#eurSecondIncome').html('$'+numberWithCommas( eurSecondIncome * seconds));
+
+    let t = setTimeout(function(){ calculateIncome() }, 1000);
+  }
+
+  function numberWithCommas(x) {
+    return x.toFixed(2).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   M.AutoInit();
 </script>
 
 
 <footer class="page-footer">
-  <div class="col s12 container_center" style="text-align: center">
-    © 2023 Software Coatzinteco
+  <div class="footer-copyright">
+    <div class="container container_center">
+      © 2023 Software Coatzinteco
+      <a id="contact" class="grey-text text-lighten-4 right" target="_blank" href="https://www.linkedin.com/in/josemanuelcuencalerma/">Contacto</a>
+    </div>
   </div>
 </footer>
+
+
+<script>
+  var ln = navigator.language;
+  var es = new Map();
+  var en = new Map();
+  var lng;
+
+  es['title'] = '¿Cuánto gana el Bicho por segundo?';
+  es['card_title'] = 'El Bicho';
+  es['team'] = 'Equipo:';
+  es['contract_start'] = 'Inicio del contrato:';
+  es['contract_end'] = 'Fin del contrato:';
+  es['annual_income'] = 'Ingreso anual:';
+  es['seconds'] = 'Segundos Transcurridos hasta Ahora:';
+  es['incomes_sofar'] = 'Ingresos hasta el momento:';
+  es['references'] = 'Fuentes:';
+  es['contact'] = 'Contacto';
+  es['information'] = 'Información';
+  es['description'] = 'Este sitio tiene como propósito dar una demostración de la implementación de un sistema cliente - servidor. El back-end es implementado en Kotlin Spring y el front-end como una web app javascript con el framework de materialize.';
+  es['description2'] = 'Próximamente se realizarán videos para compartir los pasos a seguir para desarrollar este sistema. De igual manera, el código fuente del sitio se comparte a continuación:';
+  es['github'] = 'Proyecto de Github';
+
+  en['title'] = 'How much earn CR7 per second?';
+  en['card_title'] = 'CR7';
+  en['team'] = 'Team:';
+  en['contract_start'] = 'Contract Start:';
+  en['contract_end'] = 'Contract End:';
+  en['annual_income'] = 'Annual Income:';
+  en['seconds'] = 'Seconds so far:';
+  en['incomes_sofar'] = 'Incomes so far:';
+  en['references'] = 'References:';
+  en['contact'] = 'Contact';
+  en['information'] = 'Information';
+  en['description'] = 'This site want to show how to implement a client-server system. The back-end is a Kotlin-String application and the front-end a web app which uses javascript and materialize.';
+  en['description2'] = 'I will create videos to explain how to develop this site from scratch coming soon. Also, the source code is sharing following: ';
+  en['github'] = 'Github Project';
+
+  if(ln.includes("es")){
+    lng = es;
+    document.documentElement.lang = 'es';
+  }else{
+    lng = en;
+    document.documentElement.lang = 'en';
+  }
+
+  $("title").html( lng["title"] );
+  $(".title").html( lng["title"] );
+  $("#card_title").html( lng["card_title"] );
+  $("#team").html( lng["team"] );
+  $("#contract_start").html( lng["contract_start"] );
+  $("#contract_end").html( lng["contract_end"] );
+  $("#annual_income").html( lng["annual_income"] );
+  $("#seconds").html( lng["seconds"] );
+  $("#incomes_sofar").html( lng["incomes_sofar"] );
+  $("#references").html( lng["references"] );
+  $("#contact").html( lng["contact"] );
+  $("#information").html( lng["information"] );
+  $("#description").html( lng["description"] );
+  $("#description2").html( lng["description2"] );
+  $("#github").html( lng["github"] );
+
+</script>
+
 </body>
 </html>
