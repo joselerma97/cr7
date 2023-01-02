@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bicho Incomes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1318802193452786"
+          crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="row blue teal lighten-1">
+  <div class="col s12 container_center" style="text-align: center">
+        <span class="flow-text">
+            ¿Cuánto Gana el Bicho? <a class="waves-effect modal-trigger" href="#info"><i class="material-icons white-text">help</i></a>
+        </span>
+  </div>
+</div>
+
+<div id="result">
+  Hola
+</div>
+
+<!-- Modal Structure -->
+<div id="info" class="modal">
+  <div class="modal-content">
+    <h4>Información</h4>
+    <p>Este sitio tiene como propósito dar una demostración de la implementación de un sistema cliente - servidor. Dicho servidor es implementado en Kotlin Spring y el cliente como una web app javascript con el framework de materialize.</p>
+    <p>Próximamente se realizarán videos para compartir los pasos a seguir para desarrollar este sistema. De igual manera, el código fuente del sitio se comparte a continuación:
+      <a target="_blank" href="https://github.com/joselerma97/LermaSuite">Proyecto de Github</a>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+<script>
+  $.get( "https://lermasuite.com/cr7/server.php", function( data ) {
+    $('#result').html(JSON.stringify(data.data))
+  });
+
+  M.AutoInit();
+</script>
+
+
+<footer class="page-footer">
+  <div class="col s12 container_center" style="text-align: center">
+    © 2023 Software Coatzinteco
+  </div>
+</footer>
+</body>
+</html>
